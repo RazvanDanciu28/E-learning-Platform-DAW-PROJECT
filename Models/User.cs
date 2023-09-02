@@ -9,6 +9,7 @@ namespace ELP.Models{
         [JsonIgnore]
         public ICollection<Course> Courses;
         public int budget;
+        public Guid? FavouriteTeacher;
 
         [MinLenght(6), MaxLength(128)]
         public string username{get; set;}

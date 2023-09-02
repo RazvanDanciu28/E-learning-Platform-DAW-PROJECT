@@ -9,6 +9,7 @@ namespace ELP.Models{
     public class Course: BaseEntity{
         public string CourseName {get; set;}
         public string? CourseDescription {get; set;}
+        public int pricePerLesson{get; set;}
 
         public Guid? TeacherId{get; set;}
         public Teacher? Teacher{get; set;}
