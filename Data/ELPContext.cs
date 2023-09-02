@@ -24,10 +24,8 @@ namespace ELP.Data{
 
 
             //one to one(A teacher can teach only one course and a course can be teached by only one teacher)
-            modelBuilder.Entity<Teacher>()
-                .HasOne(t => t.Course)
-                .WithOne(c => c.Teacher)
-                .HasForeignKey(c => c.TeacherId);
+            modelBuilder.Entity<TeacherCourse>()
+                .HasKey(k => k.TeacherId, k.CourseId);
 
 
             //one to many (A student can have only one favourite teacher but a teacher can be favorized by multiple students)
@@ -35,6 +33,20 @@ namespace ELP.Data{
                 .HasMany(t => t.studentsFav)
                 .WithOne(u => u.FavouriteTeacher)
                 .HasForeignKey(u => u.TeacherId);
+
+
+            //many to many
+            //a student can learn multiple courses and a course can be learned by multiple students
+            modelBuilder.Entity<UserCourse>()
+                .HasKey(k => k.UserId, k.CourseId); 
+            
+            //a student can learn from multiple teachers and a teacher can teach to multiple students
+            modelBuilder.Entity<UserTeacher>()
+                .HasKey(k => k.UserId, k.CourseId);
+
+
+            base.OnModelCreating(modelBuilder);
+
 
             
             
