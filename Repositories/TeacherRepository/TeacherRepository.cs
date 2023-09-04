@@ -20,6 +20,27 @@ namespace ELP.Repositories.TeacherRepository{
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Teacher>> GetTeacherWithSalary(int givenSalary, int indicator){
+            if (indicator == 1){
+                return await tContext.Teachers
+                    .Where(t => t.salary > givenSalary)
+                    .Include(t => t.salary)
+                    .ToListAsync();
+            }
+            else if (indicator == -1){
+                return await tContext.Teachers
+                    .Where(t => t.salary < givenSalary)
+                    .Include(t => t.salary)
+                    .ToListAsync();
+            }
+            else if (indicator == 0){
+                return await tContext.Teachers
+                    .Where(t => t.salary == givenSalary)
+                    .Include(t => t.salary)
+                    .ToListAsync();
+            }
+        }
+
         public async Task<IEnumerable<Teacher>> GetAllTeachers(){
             return await tContext.Teachers.ToListAsync();
         }
