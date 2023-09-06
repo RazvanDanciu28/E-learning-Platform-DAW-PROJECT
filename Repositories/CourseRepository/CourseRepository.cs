@@ -15,11 +15,12 @@ namespace ELP.Repositories.CourseRepository{
         }
 
 
-        //DE GANDIT
-        // public async Task<IEnumerable<Course>> GetCoursesByStudentNameAsync(string studentFirstName, string studentLastName){
-        //     return await cContext.Courses
-        //         .Include(c => c.)
-        // }
+        public async Task<IEnumerable<Course>> GetCoursesByStudentNameAsync(string studentFirstName, string studentLastName){
+            return await cContext.Users
+                .Where(u => u.firstName == studentFirstName && u.lastName == studentLastName)
+                .Include(u => u.Courses)
+                .ToListAsync();
+        }
 
         public async Task<IEnumerable<Course>> GetCoursesWithPrice(int givenPrice, int indicator){
             if (indicator == 1){

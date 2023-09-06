@@ -13,6 +13,11 @@ namespace ELP.Repositories.ITeacherRepository{
         Task<IEnumerable<Teacher>> GetTeacherWithSalary (int givenSalary, int indicator);
 
         //get all teachers
-        public Task<IEnumerable<Teacher>> GetAllTeachers();
+        Task<IEnumerable<Teacher>> GetAllTeachers();
+
+        //get teacher's raise
+        //a teacher can have a a salary increase depending on how many students have him as their favorite teacher
+        //the increase will be calculated according to the formula: (5% of salary) *  (how many students have him as their favorite teacher)
+        int GetTeacherSalaryIncrease(Teacher teacher);
     }
 }

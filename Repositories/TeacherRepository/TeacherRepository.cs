@@ -44,5 +44,21 @@ namespace ELP.Repositories.TeacherRepository{
         public async Task<IEnumerable<Teacher>> GetAllTeachers(){
             return await tContext.Teachers.ToListAsync();
         }
+
+
+        public int GetTeacherSalaryIncrease(Teacher teacher){
+            int nrStudents = 0;
+            foreach (var student in tContext.Users){
+                if (string.Equals(student.FavouriteTeacher.FirstName, teacher.FirstName, StringComparison.OrdinalIgnoreCase) &&
+                    string.Equals(student.FavouriteTeacher.LastName, teacher.LastName, StringComparison.OrdinalIgnoreCase))
+                {
+                    nrStudents++;
+                }
+            }
+
+            int increase = (int)(teacher.salary * 0.05 * nrStudents);
+            teacher.salary += increase;
+            return increase;
+        }
     }
 }
