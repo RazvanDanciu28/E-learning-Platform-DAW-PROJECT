@@ -14,11 +14,14 @@ namespace ELP.Repositories.UserRepository{
 
         
         
-        ///De Gandit
-        // public async Task<IEnumerable<User>> GetUserWithSameFavouriteTeacherAsync(string teacherFirstName, string teacherLastName){
-        //     var users = await (from user in uContext.Users
-        //                 join FavouriteTeacher in uContext.Teachers on user.)
-        // }
+        ///ish
+        public async Task<IEnumerable<User>> GetUserWithSameFavouriteTeacherAsync(string teacherFirstName, string teacherLastName){
+            var usersWithSameFavTeacher = await (from user in uContext.Users
+                        join FavouriteTeacher in uContext.Teachers on user.FavouriteTeacher.Id equals FavouriteTeacher.Id
+                        where FavouriteTeacher.FirstName == teacherFirstName && FavouriteTeacher.LastName == teacherLastName
+                        select user).ToListAsync();
+            return usersWithSameFavTeacher;
+        }
 
         public User FindByUsername(string username){
             return uContext.FirstOrDefault(x => x.Username == username);
