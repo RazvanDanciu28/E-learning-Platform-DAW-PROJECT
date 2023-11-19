@@ -27,8 +27,8 @@ namespace ELP.Repositories.UserRepository{
             return uContext.FirstOrDefault(x => x.Username == username);
         }
 
-        public  int GetNrCoursesByUsername(string username){
-            return uContext.FirstOrDefault(x => x.Username == username).Courses.Count;
-        }
+        // public  int GetNrCoursesByUsername(string username){
+        //     return uContext.FirstOrDefault(x => x.Username == username).Courses.Count;
+        // }
     }
 }
